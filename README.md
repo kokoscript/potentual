@@ -6,7 +6,7 @@ The problem is a simple cyclic graph that looks like this:
 
 ![potentual cycle](https://github.com/kokoscript/potentual/blob/main/potentualCycle.png?raw=true)
 
-Where circles are users, arrows are following relationships, and the red arrow is what we're trying to find. In other words, who follows you *and* is also followed by one or more of your mutuals?
+Where circles are users, arrows are following relationships, and the red arrow is what we're trying to suggest. In other words, who follows you *and* is also followed by one or more of your mutuals?
 
 The solving process looks like this:
 - Get all the followers of the starting user as well as who they're following
