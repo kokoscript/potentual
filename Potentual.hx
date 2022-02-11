@@ -87,59 +87,59 @@ class Potentual {
 		var followerList:Array<String> = new Array<String>();
 		var json:Dynamic;
 		var users:{data:Array<Dynamic>, meta:Dynamic};
-    	var next_token:String = null;
+		var next_token:String = null;
 
 		do {
-    		// Prevent going past the rate limit
-    		if (followerRequestCount == 15) {
+			// Prevent going past the rate limit
+			if (followerRequestCount == 15) {
 				Sys.println("Hit rate limit, please wait 15 minutes. (blame twitter)");
 				Sys.sleep((15 * 60) + 5); // extra few seconds just in case
 				followerRequestCount = 0;
 			}
 
-    		json = runTwurl("/2/users/" + id + "/followers?max_results=1000" + (next_token != null ? ("&pagination_token=" + next_token) : ""));
-    		followerRequestCount++;
+			json = runTwurl("/2/users/" + id + "/followers?max_results=1000" + (next_token != null ? ("&pagination_token=" + next_token) : ""));
+			followerRequestCount++;
 			users = json;
 
 			for (user in users.data) {
-	    		followerList.push(user.username);
-	    		handleNameMap.set(user.username, user.name);
-    			handleIdMap.set(user.username, user.id);
-    		}
+				followerList.push(user.username);
+				handleNameMap.set(user.username, user.name);
+				handleIdMap.set(user.username, user.id);
+			}
 
-    		next_token = json.meta.next_token;
-    	} while (json.meta.next_token != null);
+			next_token = json.meta.next_token;
+		} while (json.meta.next_token != null);
 
 		return followerList;
 	}
 
 	// Returns a list of all users that the user is following, based on ID
 	public static function getFollowingOfUser(id:String):Array<String> {
-    	var followingList:Array<String> = new Array<String>();
-    	var json:Dynamic;
-    	var users:{data:Array<Dynamic>, meta:Dynamic};
-    	var next_token:String = null;
+		var followingList:Array<String> = new Array<String>();
+		var json:Dynamic;
+		var users:{data:Array<Dynamic>, meta:Dynamic};
+		var next_token:String = null;
 
-    	do {
-    		// Prevent going past the rate limit
-    		if (followingRequestCount == 15) {
+		do {
+			// Prevent going past the rate limit
+			if (followingRequestCount == 15) {
 				Sys.println("Hit rate limit, please wait 15 minutes. (blame twitter)");
 				Sys.sleep((15 * 60) + 5); // extra few seconds just in case
 				followingRequestCount = 0;
 			}
 
-    		json = runTwurl("/2/users/" + id + "/following?max_results=1000" + (next_token != null ? ("&pagination_token=" + next_token) : ""));
-    		followingRequestCount++;
+			json = runTwurl("/2/users/" + id + "/following?max_results=1000" + (next_token != null ? ("&pagination_token=" + next_token) : ""));
+			followingRequestCount++;
 			users = json;
 
 			for (user in users.data) {
-	    		followingList.push(user.username);
-	    		handleNameMap.set(user.username, user.name);
-    			handleIdMap.set(user.username, user.id);
-    		}
+				followingList.push(user.username);
+				handleNameMap.set(user.username, user.name);
+				handleIdMap.set(user.username, user.id);
+			}
 
-    		next_token = json.meta.next_token;
-    	} while (json.meta.next_token != null);
+			next_token = json.meta.next_token;
+		} while (json.meta.next_token != null);
 
 		return followingList;
 	}
