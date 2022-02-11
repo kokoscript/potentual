@@ -3,7 +3,9 @@ A small tool to recommend who to follow based on your Twitter mutuals and who's 
 
 ## The goal, and how it works
 The problem is a simple cyclic graph that looks like this:
-![potentual cycle]()
+
+![potentual cycle](https://github.com/kokoscript/potentual/blob/main/potentualCycle.png?raw=true)
+
 Where circles are users, arrows are following relationships, and the red arrow is what we're trying to find. In other words, who follows you *and* is also followed by one or more of your mutuals?
 
 The solving process looks like this:
@@ -19,6 +21,10 @@ The solving process looks like this:
 - Patience! (see "Limitations")
 
 I planned to get rid of the twurl and developer account requirements by making use of basic HTTP requests, but I didn't really want to dive into figuring out OAuth. Plus, Twitter's wording on per-app rate limits is a bit confusing, so to me it seems like any user of potentual would have to use a shared rate limit... not good!
+
+## Building
+- `haxe build.hxml` to build
+- `./out/Potentual` to run
 
 ## Limitations
 Thanks to Twitter, there's a pretty hard limit on how many times one can do a follower/following lookup; currently, it's 15 lookups every 15 minutes for both endpoints. Since you can only get 1000 users at a time, this limit is very easy to hit if you have many followers, as well as if you have mutuals who follow many people. Even if one of your mutuals follows less than 1000 people, that's still a full request. Potentual will give an estimated time to make all these requests before it starts getting who your mutuals follow.
