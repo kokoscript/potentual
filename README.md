@@ -20,6 +20,8 @@ The solving process looks like this:
 - Access to the Twitter API from the account you want recommendations for
 - Patience! (see "Limitations")
 
+You'll need to [authorize twurl](https://github.com/twitter/twurl) in order for it to work (see "Getting Started" in the repository). Make sure you have set up an application in the [Twitter developer dashboard](https://developer.twitter.com/en/portal/dashboard) for that.
+
 I planned to get rid of the twurl and developer account requirements by making use of basic HTTP requests, but I didn't really want to dive into figuring out OAuth. Plus, Twitter's wording on per-app rate limits is a bit confusing, so to me it seems like any user of potentual would have to use a shared rate limit... not good!
 
 ## Building
